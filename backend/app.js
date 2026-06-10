@@ -1,14 +1,20 @@
-const express = require('express');
 const dotenv = require('dotenv');
-const cors = require('cors');
-
 dotenv.config();
+
+const express = require('express');
+const cors = require('cors');
+const { productRoutes } = require('./src/routes/productRoutes');
+const { saleRoutes } = require('./src/routes/saleRoutes');
+const { userRoutes } = require('./src/routes/userRoutes');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+app.use('/api/product', productRoutes);
+app.use('/api/sales', saleRoutes);
+app.use('/api/users', userRoutes);
 
 const sequelize = require('./src/database');
 const { User, Product, Sale } = require('./src/models/index');
