@@ -34,7 +34,13 @@ const listarPaginado = async (req, res, next) => {
 
 const alta = async (req, res, next) => {
     try {
-        const { product_name, product_price, product_description, product_image, product_category } = req.body;
+        const { product_name, product_price, product_description, product_category } = req.body;
+
+        
+        const product_image = req.file
+            ? `/uploads/${req.file.filename}`
+            : req.body.product_image || null;
+
         const producto = await Product.create({
             product_name,
             product_price,
@@ -51,7 +57,13 @@ const alta = async (req, res, next) => {
 const modificar = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { product_name, product_price, product_description, product_image, product_category, product_active } = req.body;
+        const { product_name, product_price, product_description, product_category, product_active } = req.body;
+
+        
+        const product_image = req.file
+            ? `/uploads/${req.file.filename}`
+            : req.body.product_image;
+
         await Product.update(
             { product_name, product_price, product_description, product_image, product_category, product_active },
             { where: { product_id: id } }
