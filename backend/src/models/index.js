@@ -1,3 +1,5 @@
+// Importa los tres modelos.
+// Los junta todos en un mismo archivo para poder manejar las relaciones entre ellos y exportarlos juntos
 const User = require('./User');
 const Product = require('./Product');
 const Sale = require('./Sale');

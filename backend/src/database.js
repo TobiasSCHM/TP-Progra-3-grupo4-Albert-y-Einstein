@@ -1,3 +1,4 @@
+// Importa el paquete Sequelize para manejar la conexión a la base de datos
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize(

@@ -1,40 +1,51 @@
+// Carga las variables del archivo .env
 const dotenv = require('dotenv');
 dotenv.config();
 
+// Importa los módulos necesarios
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
-const { productRoutes } = require('./src/routes/productRoutes');
+
+// Crea la aplicación Express
+const app = express();
+
+// Configura middlewares para parsear JSON y manejar CORS
+app.use(express.json()); // Entiende peticiones con datos en formato JSON
+app.use(express.urlencoded({ extended: true })); // Entiende peticiones con datos en formato URL-encoded
+app.use(cors()); // Permite solicitudes desde cualquier origen
+
+// Configura la ruta para servir archivos estáticos (imágenes)
+app.use('/uploads', express.static(path.join(__dirname, 'src/public/uploads')));
+
+// Importa las rutas de cada módulo y las registra en la app
+const { productRoutes } = require('./src/routes/productRoutes'); 
 const { saleRoutes } = require('./src/routes/saleRoutes');
 const { userRoutes } = require('./src/routes/userRoutes');
 
-const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cors());
-
-app.use('/uploads', express.static(path.join(__dirname, 'src/public/uploads')));
-
+// Configura las rutas de la API
 app.use('/api/product', productRoutes);
 app.use('/api/sales', saleRoutes);
 app.use('/api/users', userRoutes);
 
+// Importa la configuración de Sequelize y los modelos de la base de datos
 const sequelize = require('./src/database');
 const { User, Product, Sale } = require('./src/models/index');
 
+// Autentica la conexión a la base de datos y sincroniza los modelos
 sequelize.authenticate()
     .then(() => {
         console.log('Conexión a la base de datos exitosa');
-        return sequelize.sync({ alter: true });
+        return sequelize.sync({ alter: true }); // Crea o actualiza las tablas automáticamente según los modelos, sin borrar los datos existentes
     })
     .then(() => console.log('Tablas sincronizadas'))
     .catch((err) => console.error('Error:', err));
 
+// Inicia el servidor en el puerto especificado o en el puerto 3000 por defecto    
 const PORT = process.env.PORT || 3000;
-
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en el puerto ${PORT}`);
 });
 
+// Exporta la aplicación para que pueda ser utilizada en otros archivos
 module.exports = app;

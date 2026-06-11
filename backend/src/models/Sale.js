@@ -1,6 +1,9 @@
+// Importa DataTypes de Sequelize para definir los tipos de datos de los campos
+// y la instancia de Sequelize para conectar con la base de datos
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 
+// Define el modelo Sale con los campos sale_id, sale_customer_name, sale_total y sale_date
 const Sale = sequelize.define(
     'Sale',
     {
