@@ -1,13 +1,15 @@
-// Importa Express, crea un Router e importa el controlador de productos
+// Importa los módulos necesarios para definir las rutas de productos
 const express = require('express');
 const productRoutes = express.Router();
 const productController = require('../controllers/productController');
+const { validarAltaProducto, validarModificarProducto } = require('../middlewares/validate');
 
-// Define los endpoints de productos. Cada línea asocia un método HTTP y una URL con una función del controlador:
-productRoutes.get('/listar', productController.listar); // trae todos los productos activos
-productRoutes.get('/listarPaginado', productController.listarPaginado); // trae los productos de a páginas
-productRoutes.post('/alta', productController.alta); // crea un producto nuevo
-productRoutes.put('/modificar/:id', productController.modificar); // modifica un producto por su id
-productRoutes.delete('/baja/:id', productController.baja); // desactiva un producto por su id
+// Define las rutas para los productos,
+// cada ruta llama a una función del controlador correspondiente y utiliza middlewares de validación cuando es necesario
+productRoutes.get('/listar', productController.listar);
+productRoutes.get('/listarPaginado', productController.listarPaginado);
+productRoutes.post('/alta', validarAltaProducto, productController.alta);
+productRoutes.put('/modificar/:id', validarModificarProducto, productController.modificar);
+productRoutes.delete('/baja/:id', productController.baja);
 
 module.exports = { productRoutes };
