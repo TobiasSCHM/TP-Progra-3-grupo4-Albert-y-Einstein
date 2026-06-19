@@ -18,8 +18,10 @@ app.use(cors()); // Permite solicitudes desde cualquier origen
 app.set('view engine', 'ejs'); // Configura EJS como el motor de plantillas para renderizar vistas
 app.set('views', path.join(__dirname, 'src/views')); // Configura la ruta para las vistas de EJS
 
-// Configura la ruta para servir archivos estáticos (imágenes)
+// Configura la ruta para servir archivos estáticos (imágenes, CSS, etc.) desde la carpeta 'public'
 app.use('/uploads', express.static(path.join(__dirname, 'src/public/uploads')));
+app.use('/css', express.static(path.join(__dirname, 'src/public/css')));
+app.use('/images', express.static(path.join(__dirname, 'src/public/images')));
 
 // Importa las rutas de cada módulo y las registra en la app
 const { productRoutes } = require('./src/routes/productRoutes'); 

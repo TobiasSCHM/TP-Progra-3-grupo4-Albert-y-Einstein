@@ -1,0 +1,124 @@
+/* Variables de color */
+:root {
+    --color-primario: #264653;
+    --color-secundario: #e76f51;
+    --color-fondo: #fafafa;
+    --color-texto: #2b2b2b;
+    --color-borde: #d8d8d8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Contenedor del login */
+.login-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+}
+
+.login-logo {
+    width: 300px;
+    margin-bottom: 16px;
+}
+
+.login-container h1 {
+    color: var(--color-primario);
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+}
+
+.login-container h2 {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 24px;
+    font-weight: normal;
+}
+
+/* Formulario */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.login-form label {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    margin-top: 12px;
+    color: var(--color-texto);
+}
+
+.login-form input {
+    padding: 10px 12px;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.login-form input:focus {
+    border-color: var(--color-primario);
+}
+
+/* Botones */
+.btn-primary {
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1d3540;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-secundario);
+    border: 1px solid var(--color-secundario);
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secundario);
+    color: white;
+}
+
+/* Mensaje de error */
+.error-msg {
+    color: #c0392b;
+    background-color: #fdecea;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+}
