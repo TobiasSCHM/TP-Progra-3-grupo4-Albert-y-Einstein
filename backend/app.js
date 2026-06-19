@@ -6,6 +6,7 @@ dotenv.config();
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const ejs = require('ejs');
 
 // Crea la aplicación Express
 const app = express();
@@ -14,6 +15,8 @@ const app = express();
 app.use(express.json()); // Entiende peticiones con datos en formato JSON
 app.use(express.urlencoded({ extended: true })); // Entiende peticiones con datos en formato URL-encoded
 app.use(cors()); // Permite solicitudes desde cualquier origen
+app.set('view engine', 'ejs'); // Configura EJS como el motor de plantillas para renderizar vistas
+app.set('views', path.join(__dirname, 'src/views')); // Configura la ruta para las vistas de EJS
 
 // Configura la ruta para servir archivos estáticos (imágenes)
 app.use('/uploads', express.static(path.join(__dirname, 'src/public/uploads')));
@@ -22,11 +25,13 @@ app.use('/uploads', express.static(path.join(__dirname, 'src/public/uploads')));
 const { productRoutes } = require('./src/routes/productRoutes'); 
 const { saleRoutes } = require('./src/routes/saleRoutes');
 const { userRoutes } = require('./src/routes/userRoutes');
+const { adminViewRoutes } = require('./src/routes/adminViewRoutes');
 
 // Configura las rutas de la API
 app.use('/api/product', productRoutes);
 app.use('/api/sales', saleRoutes);
 app.use('/api/users', userRoutes);
+app.use('/admin', adminViewRoutes);
 
 // Importa la configuración de Sequelize y los modelos de la base de datos
 const sequelize = require('./src/database');
