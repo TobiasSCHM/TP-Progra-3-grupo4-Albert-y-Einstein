@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <% include('header', { tituloPagina: 'Nuevo producto' }) %>
+</head>
+<body class="panel-admin">
+    <% include('navbar', { activo: 'nuevo-producto' }) %>
+
+    <div class="contenido-panel">
+
+        <h1 class="titulo-seccion">Nuevo producto</h1>
+
+        <% if (typeof error !== 'undefined') { %>
+            <p class="error-msg"><%= error %></p>
+        <% } %>
+        <% if (typeof errores !== 'undefined' && errores.length > 0) { %>
+            <ul class="error-msg lista-errores">
+                <% errores.forEach(function(e) { %>
+                    <li><%= e %></li>
+                <% }); %>
+            </ul>
+        <% } %>
+
+        <form action="/admin/productos/nuevo" method="POST" enctype="multipart/form-data" class="form-producto">
+
+            <label for="product_name">Nombre</label>
+            <input type="text" id="product_name" name="product_name"
+                   value="<%= typeof datos !== 'undefined' ? datos.product_name : '' %>" required>
+
+            <label for="product_price">Precio</label>
+            <input type="number" id="product_price" name="product_price" step="0.01" min="0"
+                   value="<%= typeof datos !== 'undefined' ? datos.product_price : '' %>" required>
+
+            <label for="product_category">Categoría</label>
+            <input type="text" id="product_category" name="product_category"
+                   value="<%= typeof datos !== 'undefined' ? datos.product_category : '' %>" required>
+
+            <label for="product_description">Descripción</label>
+            <textarea id="product_description" name="product_description" rows="4" required><%= typeof datos !== 'undefined' ? datos.product_description : '' %></textarea>
+
+            <label for="product_image">Imagen</label>
+            <input type="file" id="product_image" name="product_image" accept="image/png, image/jpeg, image/webp">
+
+            <div class="acciones-form">
+                <a href="/admin/dashboard" class="btn-secondary">Cancelar</a>
+                <button type="submit" class="btn-primary">Guardar producto</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

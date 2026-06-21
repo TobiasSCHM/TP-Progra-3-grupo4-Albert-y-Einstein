@@ -7,13 +7,15 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const ejs = require('ejs');
+const cookieParser = require('cookie-parser');
 
 // Crea la aplicación Express
 const app = express();
 
-// Configura middlewares para parsear JSON y manejar CORS
+// Configura middlewares para parsear JSON, cookies firmadas y manejar CORS
 app.use(express.json()); // Entiende peticiones con datos en formato JSON
 app.use(express.urlencoded({ extended: true })); // Entiende peticiones con datos en formato URL-encoded
+app.use(cookieParser(process.env.COOKIE_SECRET)); // Lee cookies, y las firmadas con el secreto del .env
 app.use(cors()); // Permite solicitudes desde cualquier origen
 app.set('view engine', 'ejs'); // Configura EJS como el motor de plantillas para renderizar vistas
 app.set('views', path.join(__dirname, 'src/views')); // Configura la ruta para las vistas de EJS

@@ -23,7 +23,7 @@ body {
     min-height: 100vh;
 }
 
-/* Contenedor del login */
+/* contenedor del login */
 .login-container {
     background-color: #ffffff;
     border-radius: 12px;
@@ -113,7 +113,7 @@ body {
     color: white;
 }
 
-/* Mensaje de error */
+/* mensaje de error */
 .error-msg {
     color: #c0392b;
     background-color: #fdecea;
@@ -121,4 +121,82 @@ body {
     border-radius: 8px;
     font-size: 0.85rem;
     margin-bottom: 10px;
+}
+/* general del panel */
+body.panel-admin {
+    display: block;
+    min-height: 100vh;
+    align-items: initial;
+    justify-content: initial;
+}
+
+.contenido-panel {
+    max-width: 1100px;
+    margin: 24px auto;
+    padding: 0 24px;
+}
+
+/*navbar */
+.navbar {
+    background-color: var(--color-primario);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.navbar-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.navbar-links a.active {
+    background-color: var(--color-secundario);
+}
+
+.btn-logout {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: white;
+    color: var(--color-primario);
 }

@@ -1,0 +1,23 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <img src="/images/logo-soundstore.png" alt="SoundStore" class="navbar-logo">
+        <span>SoundStore Admin</span>
+    </div>
+
+    <ul class="navbar-links">
+        <li>
+            <a href="/admin/dashboard" class="<%= typeof activo !== 'undefined' && activo === 'dashboard' ? 'active' : '' %>">
+                Dashboard
+            </a>
+        </li>
+        <li>
+            <a href="/admin/productos/nuevo" class="<%= typeof activo !== 'undefined' && activo === 'nuevo-producto' ? 'active' : '' %>">
+                Nuevo producto
+            </a>
+        </li>
+    </ul>
+
+    <form action="/admin/logout" method="POST" class="navbar-logout">
+        <button type="submit" class="btn-logout">Cerrar sesión</button>
+    </form>
+</nav>
