@@ -46,8 +46,10 @@
                             </td>
                             <td class="acciones-tabla">
                                 <a href="/admin/productos/<%= producto.product_id %>/editar" class="btn-accion btn-editar">Editar</a>
-                                <form action="/admin/productos/<%= producto.product_id %>/baja" method="POST" class="form-inline">
-                                    <button type="submit" class="btn-accion btn-baja">
+                                <form action="/admin/productos/<%= producto.product_id %>/baja" method="POST" class="form-inline form-toggle-estado"
+                                      data-nombre="<%= producto.product_name %>"
+                                      data-accion="<%= producto.product_active ? 'desactivar' : 'activar' %>">
+                                    <button type="button" class="btn-accion btn-baja">
                                         <%= producto.product_active ? 'Desactivar' : 'Activar' %>
                                     </button>
                                 </form>
@@ -98,5 +100,70 @@
         </table>
 
     </div>
+
+    <!-- Modal de confirmación reutilizable para desactivar / activar productos -->
+    <div id="modalConfirmacion" class="modal-overlay oculto">
+        <div class="modal-caja">
+            <h3 id="modalTitulo">Confirmar acción</h3>
+            <p id="modalMensaje">¿Estás seguro?</p>
+            <div class="modal-acciones">
+                <button type="button" class="btn-secondary" id="modalCancelar">Cancelar</button>
+                <button type="button" class="btn-primary" id="modalConfirmar">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal de confirmación para baja/activación de productos.
+        // En vez de enviar el form directo, el botón abre el modal y
+        // recién al confirmar se hace el submit real del form correspondiente.
+        (function () {
+            const modal = document.getElementById('modalConfirmacion');
+            const modalTitulo = document.getElementById('modalTitulo');
+            const modalMensaje = document.getElementById('modalMensaje');
+            const btnCancelar = document.getElementById('modalCancelar');
+            const btnConfirmar = document.getElementById('modalConfirmar');
+            let formPendiente = null;
+
+            function abrirModal(form) {
+                formPendiente = form;
+                const nombre = form.dataset.nombre;
+                const accion = form.dataset.accion; // 'activar' o 'desactivar'
+
+                modalTitulo.textContent = accion === 'activar' ? 'Activar producto' : 'Desactivar producto';
+                modalMensaje.textContent = `¿Seguro que querés ${accion} "${nombre}"?`;
+
+                modal.classList.remove('oculto');
+                btnConfirmar.focus();
+            }
+
+            function cerrarModal() {
+                modal.classList.add('oculto');
+                formPendiente = null;
+            }
+
+            document.querySelectorAll('.form-toggle-estado').forEach(function (form) {
+                form.querySelector('button').addEventListener('click', function () {
+                    abrirModal(form);
+                });
+            });
+
+            btnCancelar.addEventListener('click', cerrarModal);
+
+            btnConfirmar.addEventListener('click', function () {
+                if (formPendiente) {
+                    formPendiente.submit();
+                }
+            });
+
+            // Cerrar haciendo click fuera de la caja o con la tecla Escape
+            modal.addEventListener('click', function (e) {
+                if (e.target === modal) cerrarModal();
+            });
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.classList.contains('oculto')) cerrarModal();
+            });
+        })();
+    </script>
 </body>
 </html>
