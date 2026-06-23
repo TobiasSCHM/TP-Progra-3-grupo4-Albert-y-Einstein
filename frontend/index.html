@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundStore</title>
+
+    <link rel="icon" href="./images/favicon.ico">
+
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/public/css/index.css">
+</head>
+
+<body>
+
+
+    <header class="navbar">
+
+        <div class="navbar-brand">
+            <img
+                src="./images/logo-soundstore.png"
+                alt="SoundStore"
+                class="navbar-logo">
+
+            <span>SoundStore</span>
+        </div>
+
+        <ul class="navbar-links">
+            <li>
+                <a href="index.html">Inicio</a>
+            </li>
+        </ul>
+
+        <div>
+            <a href="/admin/login" class="btn-admin">
+                Panel Administrador
+            </a>
+        </div>
+
+    </header>
+
+
+    <main class="welcome-container">
+
+        <section class="welcome-card">
+
+            <img
+                src="./images/logo-soundstore.png"
+                alt="SoundStore"
+                class="welcome-logo">
+
+            <h1>Bienvenido a SoundStore</h1>
+
+            <p>
+                Autoservicio de guitarras y bajos.
+            </p>
+
+            <form id="form-bienvenida">
+
+                <label for="nombre">
+                    Ingresá tu nombre para comenzar
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    maxlength="40"
+                    required>
+
+                <button type="submit" class="btn-primary">
+                    Comenzar Compra
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <div id="footer-container"></div>
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/index.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito — SoundStore</title>
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/public/css/carrito.css">
+</head>
+<body>
+
+    <div id="header-container"></div>
+
+    <main class="carrito-main">
+
+        <h1 class="carrito-titulo">Tu carrito</h1>
+        <p class="carrito-cliente" id="carrito-cliente"></p>
+
+        <!-- Lista de items -->
+        <section id="carrito-lista" class="carrito-lista">
+            <!-- se renderiza con JS -->
+        </section>
+
+        <!-- Estado vacío -->
+        <div id="carrito-vacio" class="carrito-vacio oculto">
+            <p class="carrito-vacio-mensaje">Tu carrito está vacío.</p>
+            <a href="/productos.html" class="btn-primary">Ver productos</a>
+        </div>
+
+        <!-- Resumen y botón de confirmar -->
+        <div id="carrito-resumen" class="carrito-resumen oculto">
+            <div class="resumen-linea">
+                <span>Subtotal</span>
+                <span id="resumen-subtotal">$0</span>
+            </div>
+            <div class="resumen-linea resumen-total">
+                <span>Total</span>
+                <span id="resumen-total">$0</span>
+            </div>
+            <button class="btn-primary btn-confirmar" id="btn-confirmar" onclick="confirmarCompra()">
+                Confirmar compra
+            </button>
+            <a href="/productos.html" class="btn-secondary btn-seguir">
+                Seguir comprando
+            </a>
+        </div>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/carrito.js"></script>
+
+</body>
+</html>

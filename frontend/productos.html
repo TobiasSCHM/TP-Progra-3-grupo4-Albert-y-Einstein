@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos — SoundStore</title>
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/public/css/productos.css">
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <main class="productos-main">
+        <div class="categorias-tabs">
+            <button class="tab-btn activo" data-categoria="Guitarras"> Guitarras</button>
+            <button class="tab-btn" data-categoria="Bajos"> Bajos</button>
+        </div>
+        <p id="productos-estado" class="productos-estado oculto"></p>
+        <section id="grilla-productos" class="grilla-productos"></section>
+        <div id="paginacion" class="paginacion"></div>
+    </main>
+
+    <div id="footer-container"></div>
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/productos.js"></script>
+</body>
+</html>

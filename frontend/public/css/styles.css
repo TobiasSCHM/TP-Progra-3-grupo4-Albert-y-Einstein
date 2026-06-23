@@ -1,0 +1,146 @@
+/* VARIABLES FRONTEND */
+
+:root {
+    --color-primario: #355070;
+    --color-secundario: #d97706;
+    --color-fondo: #fafafa;
+    --color-texto: #2b2b2b;
+    --color-borde: #d8d8d8;
+}
+
+/* NAVBAR */
+
+.navbar {
+    background-color: var(--color-primario);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 12px 24px;
+
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.navbar-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+}
+
+.navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 8px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+
+    padding: 8px 14px;
+
+    border-radius: 8px;
+
+    transition: background-color 0.2s;
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn-admin {
+    background-color: var(--color-secundario);
+
+    color: white;
+    text-decoration: none;
+
+    padding: 8px 14px;
+
+    border-radius: 8px;
+
+    font-size: 0.85rem;
+
+    transition: opacity 0.2s;
+}
+
+.btn-admin:hover {
+    opacity: 0.9;
+}
+
+/* FOOTER */
+
+.footer {
+    background-color: var(--color-primario);
+    color: white;
+
+    margin-top: 60px;
+}
+
+.footer-contenido {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 24px;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.footer-seccion h3 {
+    color: var(--color-secundario);
+    margin-bottom: 10px;
+}
+
+.footer-seccion p {
+    margin: 4px 0;
+}
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footer-contenido {
+        flex-direction: column;
+        text-align: center;
+    }
+
+}
+
+[data-tema="oscuro"] {
+    --color-fondo: #1a1a2e;
+    --color-texto: #e0e0e0;
+    --color-borde: #444;
+}
+
+[data-tema="oscuro"] body {
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+[data-tema="oscuro"] .welcome-card,
+[data-tema="oscuro"] .modal-caja {
+    background-color: #16213e;
+    color: var(--color-texto);
+}
