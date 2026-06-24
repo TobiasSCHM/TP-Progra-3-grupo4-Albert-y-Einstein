@@ -38,12 +38,24 @@
                 <span>Total</span>
                 <span id="resumen-total">$0</span>
             </div>
-            <button class="btn-primary btn-confirmar" id="btn-confirmar" onclick="confirmarCompra()">
+            <button class="btn-primary btn-confirmar" id="btn-confirmar" onclick="abrirModalConfirmacion()">
                 Confirmar compra
             </button>
             <a href="/productos.html" class="btn-secondary btn-seguir">
                 Seguir comprando
             </a>
+        </div>
+
+        <!-- Modal de confirmación de compra -->
+        <div id="modal-confirmar" class="modal-overlay oculto">
+            <div class="modal-caja">
+                <h2>¿Confirmar tu compra?</h2>
+                <p>Vas a comprar <strong id="modal-cantidad-items"></strong> producto(s) por un total de <strong id="modal-total"></strong>.</p>
+                <div class="modal-botones">
+                    <button id="modal-cancelar" class="btn-secondary">Cancelar</button>
+                    <button id="modal-aceptar" class="btn-primary">Sí, confirmar</button>
+                </div>
+            </div>
         </div>
 
     </main>

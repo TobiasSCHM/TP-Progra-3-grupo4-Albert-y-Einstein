@@ -65,6 +65,23 @@ function quitarItem(id) {
     renderCarrito();
 }
 
+// Abre el modal de confirmación mostrando el resumen de la compra
+function abrirModalConfirmacion() {
+    const carrito = getCarrito();
+    if (carrito.length === 0) return;
+
+    const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
+    document.getElementById('modal-cantidad-items').textContent = totalItems;
+    document.getElementById('modal-total').textContent = formatearPrecio(getTotalPrecio());
+    document.getElementById('modal-confirmar').classList.remove('oculto');
+}
+
+// Cierra el modal sin confirmar la compra
+function cerrarModalConfirmacion() {
+    document.getElementById('modal-confirmar').classList.add('oculto');
+}
+
 async function confirmarCompra() {
     const carrito = getCarrito();
     const nombre  = getNombre();
@@ -139,4 +156,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (clienteEl) clienteEl.textContent = `Hola, ${getNombre()}`;
 
     renderCarrito();
+
+    // Conecta los botones del modal de confirmación
+    document.getElementById('modal-cancelar').addEventListener('click', cerrarModalConfirmacion);
+    document.getElementById('modal-aceptar').addEventListener('click', () => {
+        cerrarModalConfirmacion();
+        confirmarCompra();
+    });
 });
