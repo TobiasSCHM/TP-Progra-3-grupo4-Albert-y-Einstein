@@ -52,6 +52,19 @@ body {
     font-weight: normal;
 }
 
+/* Títulos de sección */
+.titulo-categoria {
+    color: var(--color-secundario);
+    font-size: 1.1rem;
+    margin: 28px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.titulo-categoria:first-of-type {
+    margin-top: 12px;
+}
+
 /* Formulario */
 .login-form {
     display: flex;

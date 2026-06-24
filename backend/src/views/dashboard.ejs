@@ -14,55 +14,57 @@
             <p class="error-msg"><%= errorCarga %></p>
         <% } %>
 
-        <table class="tabla-admin">
-            <thead>
-                <tr>
-                    <th>Imagen</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% if (typeof productos !== 'undefined' && productos.length > 0) { %>
-                    <% productos.forEach(function(producto) { %>
+        <% if (typeof productosPorCategoria !== 'undefined' && Object.keys(productosPorCategoria).length > 0) { %>
+            <% Object.keys(productosPorCategoria).forEach(function(categoria) { %>
+
+                <h2 class="titulo-categoria"><%= categoria %></h2>
+
+                <table class="tabla-admin">
+                    <thead>
                         <tr>
-                            <td>
-                                <% if (producto.product_image) { %>
-                                    <img src="<%= producto.product_image %>" alt="<%= producto.product_name %>" class="thumb-producto">
-                                <% } else { %>
-                                    <span class="sin-imagen">Sin imagen</span>
-                                <% } %>
-                            </td>
-                            <td><%= producto.product_name %></td>
-                            <td><%= producto.product_category %></td>
-                            <td>$<%= producto.product_price %></td>
-                            <td>
-                                <span class="badge <%= producto.product_active ? 'badge-activo' : 'badge-inactivo' %>">
-                                    <%= producto.product_active ? 'Activo' : 'Inactivo' %>
-                                </span>
-                            </td>
-                            <td class="acciones-tabla">
-                                <a href="/admin/productos/<%= producto.product_id %>/editar" class="btn-accion btn-editar">Editar</a>
-                                <form action="/admin/productos/<%= producto.product_id %>/baja" method="POST" class="form-inline form-toggle-estado"
-                                      data-nombre="<%= producto.product_name %>"
-                                      data-accion="<%= producto.product_active ? 'desactivar' : 'activar' %>">
-                                    <button type="button" class="btn-accion btn-baja">
-                                        <%= producto.product_active ? 'Desactivar' : 'Activar' %>
-                                    </button>
-                                </form>
-                            </td>
+                            <th>Imagen</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
                         </tr>
-                    <% }); %>
-                <% } else { %>
-                    <tr>
-                        <td colspan="6" class="celda-vacia">No hay productos cargados todavía.</td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+                    </thead>
+                    <tbody>
+                        <% productosPorCategoria[categoria].forEach(function(producto) { %>
+                            <tr>
+                                <td>
+                                    <% if (producto.product_image) { %>
+                                        <img src="<%= producto.product_image %>" alt="<%= producto.product_name %>" class="thumb-producto">
+                                    <% } else { %>
+                                        <span class="sin-imagen">Sin imagen</span>
+                                    <% } %>
+                                </td>
+                                <td><%= producto.product_name %></td>
+                                <td>$<%= producto.product_price %></td>
+                                <td>
+                                    <span class="badge <%= producto.product_active ? 'badge-activo' : 'badge-inactivo' %>">
+                                        <%= producto.product_active ? 'Activo' : 'Inactivo' %>
+                                    </span>
+                                </td>
+                                <td class="acciones-tabla">
+                                    <a href="/admin/productos/<%= producto.product_id %>/editar" class="btn-accion btn-editar">Editar</a>
+                                    <form action="/admin/productos/<%= producto.product_id %>/baja" method="POST" class="form-inline form-toggle-estado"
+                                          data-nombre="<%= producto.product_name %>"
+                                          data-accion="<%= producto.product_active ? 'desactivar' : 'activar' %>">
+                                        <button type="button" class="btn-accion btn-baja">
+                                            <%= producto.product_active ? 'Desactivar' : 'Activar' %>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+
+            <% }); %>
+        <% } else { %>
+            <p class="celda-vacia">No hay productos cargados todavía.</p>
+        <% } %>
 
         <h1 class="titulo-seccion">Últimas ventas</h1>
 

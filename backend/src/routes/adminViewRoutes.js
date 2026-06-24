@@ -62,9 +62,19 @@ adminViewRoutes.get('/dashboard', async (req, res) => {
             order: [['sale_date', 'DESC']],
             limit: 10
         });
-        res.render('dashboard', { productos, ventas });
+
+        const productosPorCategoria = {};
+        productos.forEach(producto => {
+            const categoria = producto.product_category;
+            if (!productosPorCategoria[categoria]) {
+                productosPorCategoria[categoria] = [];
+            }
+            productosPorCategoria[categoria].push(producto);
+        });
+
+        res.render('dashboard', { productosPorCategoria, ventas });
     } catch (error) {
-        res.render('dashboard', { productos: [], ventas: [], errorCarga: 'No se pudieron cargar los datos del panel.' });
+        res.render('dashboard', { productosPorCategoria: {}, ventas: [], errorCarga: 'No se pudieron cargar los datos del panel.' });
     }
 });
  
