@@ -8,6 +8,8 @@
     --color-fondo: #f7f3ec;
     --color-texto: #2b2b2b;
     --color-borde: #d8d2c4;
+    --color-acento-secundario: #ffffff;
+    --color-navbar: #3b545a;
 }
 
 body {
@@ -19,7 +21,7 @@ body {
 /* NAVBAR */
 
 .navbar {
-    background-color: var(--color-primario);
+    background-color: var(--color-navbar);
     color: white;
 
     display: flex;
@@ -46,8 +48,8 @@ body {
 }
 
 .navbar-logo {
-    width: 36px;
-    height: 36px;
+    height: 112px;
+    width: auto;
     object-fit: contain;
 }
 
@@ -55,21 +57,28 @@ body {
     list-style: none;
     display: flex;
     gap: 8px;
+
+    flex: 1;
+    justify-content: center;
 }
 
 .navbar-links a {
     color: white;
     text-decoration: none;
 
-    padding: 8px 14px;
+    padding: 10px 18px;
 
     border-radius: 8px;
 
-    transition: background-color 0.2s;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    transition: background-color 0.2s, transform 0.2s;
 }
 
 .navbar-links a:hover {
     background-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
 }
 
 .btn-admin {
@@ -84,11 +93,12 @@ body {
 
     font-size: 0.85rem;
 
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, transform 0.2s;
 }
 
 .btn-admin:hover {
     opacity: 0.9;
+    transform: translateY(-2px);
 }
 
 /* FOOTER */
@@ -142,8 +152,11 @@ body {
 
 [data-tema="oscuro"] {
     --color-fondo: #1a1a2e;
+    --color-fondo-card: #1e2a3a;
     --color-texto: #e0e0e0;
-    --color-borde: #444;
+    --color-texto-secundario: #a8b3c2;
+    --color-borde: #3a4658;
+    --color-acento-secundario: #1e2a3a;
 }
 
 [data-tema="oscuro"] body {
@@ -153,7 +166,7 @@ body {
 
 [data-tema="oscuro"] .welcome-card,
 [data-tema="oscuro"] .modal-caja {
-    background-color: #16213e;
+    background-color: var(--color-fondo-card);
     color: var(--color-texto);
 }
 

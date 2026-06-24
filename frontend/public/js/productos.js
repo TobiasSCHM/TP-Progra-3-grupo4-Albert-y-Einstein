@@ -65,6 +65,10 @@ function renderProductos() {
 
     grilla.innerHTML = productos.map(p => crearCardHTML(p)).join('');
 
+    grilla.querySelectorAll('.producto-card').forEach((card, i) => {
+        card.style.animationDelay = `${i * 60}ms`;
+    });
+
     grilla.querySelectorAll('.btn-agregar').forEach(btn => {
         btn.addEventListener('click', () => {
             const producto = {
@@ -84,7 +88,7 @@ function renderProductos() {
 
 function crearCardHTML(p) {
     const imagenSrc = p.product_image
-    ? `http://localhost:3000${p.product_image}`
+    ? `${BACKEND_URL}${p.product_image}`
     : '/public/images/sin-imagen.png';
 
     return `
@@ -106,7 +110,7 @@ function crearCardHTML(p) {
                         data-id="${p.product_id}"
                         data-nombre="${escapar(p.product_name)}"
                         data-precio="${p.product_price}"
-                        data-imagen="${p.product_image ? 'http://localhost:3000' + p.product_image : ''}"
+                        data-imagen="${p.product_image ? BACKEND_URL + p.product_image : ''}"
                         data-categoria="${escapar(p.product_category)}"
                     >
                         + Agregar
@@ -177,9 +181,11 @@ function mostrarFeedbackBoton(btn) {
     const textoOriginal = btn.textContent;
     btn.textContent = '✓ Agregado';
     btn.disabled = true;
+    btn.classList.add('agregado');
     setTimeout(() => {
         btn.textContent = textoOriginal;
         btn.disabled = false;
+        btn.classList.remove('agregado');
     }, 900);
 }
 

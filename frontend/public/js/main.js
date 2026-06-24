@@ -1,6 +1,5 @@
 // Se importa en: productos.html, carrito.html, ticket.html
 
-const API_BASE = 'http://localhost:3000/api';
 const KEY_CARRITO = 'soundstore_carrito';
 const KEY_NOMBRE  = 'clienteNombre';
 const KEY_TEMA    = 'soundstore_tema';
@@ -113,6 +112,9 @@ async function cargarPartial(selectorContenedor, rutaHTML) {
         const res = await fetch(rutaHTML);
         if (!res.ok) throw new Error('No se pudo cargar el partial');
         contenedor.innerHTML = await res.text();
+
+        const btnAdmin = contenedor.querySelector('#btn-admin-link');
+        if (btnAdmin) btnAdmin.href = `${BACKEND_URL}/admin/login`;
     } catch (err) {
         console.error(`Error cargando partial (${rutaHTML}):`, err);
     }
