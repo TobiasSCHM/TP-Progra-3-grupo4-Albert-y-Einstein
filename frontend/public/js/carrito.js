@@ -1,11 +1,11 @@
-
-
+// Renderiza el contenido del carrito en el DOM
 function renderCarrito() {
     const carrito = getCarrito();
     const lista   = document.getElementById('carrito-lista');
     const vacio   = document.getElementById('carrito-vacio');
     const resumen = document.getElementById('carrito-resumen');
 
+    // Si el carrito está vacío, muestra el mensaje correspondiente y oculta el resumen
     if (carrito.length === 0) {
         lista.innerHTML = '';
         vacio.classList.remove('oculto');
@@ -13,9 +13,11 @@ function renderCarrito() {
         return;
     }
 
+    // Si hay productos en el carrito, oculta el mensaje de vacío y muestra el resumen
     vacio.classList.add('oculto');
     resumen.classList.remove('oculto');
 
+    // Genera el HTML de cada item del carrito y lo inserta en la lista
     lista.innerHTML = carrito.map(item => {
         const imagenSrc = item.imagen || '/images/sin-imagen.png';
         const subtotal  = item.precio * item.cantidad;
@@ -48,18 +50,20 @@ function renderCarrito() {
     actualizarResumen();
 }
 
+// Actualiza el resumen del carrito mostrando el subtotal y total
 function actualizarResumen() {
     const total = getTotalPrecio();
     document.getElementById('resumen-subtotal').textContent = formatearPrecio(total);
     document.getElementById('resumen-total').textContent    = formatearPrecio(total);
 }
 
-
+// Cambia la cantidad de un producto en el carrito y vuelve a renderizarlo
 function cambiarCantidad(id, nuevaCantidad) {
     actualizarCantidad(id, nuevaCantidad); // main.js borra el item si queda en 0
     renderCarrito();
 }
 
+// Quita un producto del carrito y vuelve a renderizarlo
 function quitarItem(id) {
     eliminarDelCarrito(id); // main.js
     renderCarrito();
@@ -82,10 +86,12 @@ function cerrarModalConfirmacion() {
     document.getElementById('modal-confirmar').classList.add('oculto');
 }
 
+// Envía la compra al backend para crear una nueva venta y redirige al ticket
 async function confirmarCompra() {
     const carrito = getCarrito();
     const nombre  = getNombre();
 
+    // Si el carrito está vacío, no hace nada
     if (carrito.length === 0) return;
 
     const btn = document.getElementById('btn-confirmar');
@@ -103,6 +109,7 @@ async function confirmarCompra() {
         }))
     };
 
+    // Envía la solicitud al backend para crear la venta
     try {
         const res = await fetch(`${API_BASE}/sales/alta`, {
             method:  'POST',
@@ -110,11 +117,14 @@ async function confirmarCompra() {
             body:    JSON.stringify(payload)
         });
 
+        // Si la respuesta no es OK, intenta leer el mensaje de error y lanza una excepción
         if (!res.ok) {
             const err = await res.json().catch(() => ({}));
             throw new Error(err.error || `Error ${res.status}`);
         }
 
+        // Si la venta se creó correctamente, obtiene el id de la venta
+        // y guarda los datos en localStorage para mostrar el ticket
         const data = await res.json();
 
         // Guarda el id de la venta para mostrarla en el ticket
@@ -123,9 +133,11 @@ async function confirmarCompra() {
         localStorage.setItem('soundstore_ticket_items', JSON.stringify(carrito));
         localStorage.setItem('soundstore_ticket_total', getTotalPrecio());
 
+        // Vacía el carrito y redirige al ticket
         vaciarCarrito(); // main.js
         window.location.href = '/ticket.html';
 
+        // Si todo salió bien, el usuario será redirigido al ticket y no verá este mensaje
     } catch (err) {
         console.error('Error al confirmar compra:', err);
         alert(`No se pudo procesar la compra: ${err.message}. Intentá de nuevo.`);
@@ -145,8 +157,7 @@ function escaparHTML(str) {
         .replace(/"/g, '&quot;');
 }
 
-
-
+// Formatea un número como precio en pesos argentinos
 document.addEventListener('DOMContentLoaded', async () => {
     requireNombre(); // main.js 
     await initLayout();

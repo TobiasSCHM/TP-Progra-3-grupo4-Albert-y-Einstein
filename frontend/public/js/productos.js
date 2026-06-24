@@ -14,6 +14,7 @@ const estado = {
 async function fetchTodosLosProductos() {
     mostrarEstado('Cargando productos...', false);
 
+    // Fetch a todos los productos desde el backend, sin paginación
     try {
         const res = await fetch(`${API_BASE}/product/listarPaginado?pagina=1&limite=9999`);
         if (!res.ok) throw new Error('Error al obtener productos');

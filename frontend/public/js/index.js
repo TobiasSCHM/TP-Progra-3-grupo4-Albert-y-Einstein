@@ -4,6 +4,7 @@ vaciarCarrito();
 
 const formulario = document.getElementById("form-bienvenida");
 
+// Si el usuario ya ingresó su nombre en una sesión anterior, lo redirigimos a productos.html
 formulario.addEventListener("submit", (event) => {
 
     event.preventDefault();
@@ -18,6 +19,7 @@ formulario.addEventListener("submit", (event) => {
         return;
     }
 
+    // Guardamos el nombre del cliente en localStorage para usarlo en la pantalla de productos
     localStorage.setItem("clienteNombre", nombre);
 
     window.location.href = "./productos.html";

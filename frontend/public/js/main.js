@@ -32,6 +32,7 @@ function guardarCarrito(carrito) {
     localStorage.setItem(KEY_CARRITO, JSON.stringify(carrito));
 }
 
+// Agrega un producto al carrito, si ya existe incrementa la cantidad
 function agregarAlCarrito(producto) {
     const carrito = getCarrito();
     const existente = carrito.find(item => item.id === producto.id);
@@ -50,6 +51,7 @@ function eliminarDelCarrito(id) {
     actualizarContadorCarrito();
 }
 
+// Actualiza la cantidad de un producto en el carrito, si la nueva cantidad es 0 o inválida lo elimina
 function actualizarCantidad(id, nuevaCantidad) {
     const cantidad = parseInt(nuevaCantidad);
     if (isNaN(cantidad) || cantidad <= 0) {
@@ -65,19 +67,23 @@ function actualizarCantidad(id, nuevaCantidad) {
     actualizarContadorCarrito();
 }
 
+// Calcula el total de items y el total de precio del carrito
 function getTotalItems() {
-    return getCarrito().reduce((total, item) => total + item.cantidad, 0);
+    return getCarrito().reduce((total, item) => total + item.cantidad, 0); // suma la cantidad de cada item
 }
 
+// Calcula el total de precio del carrito
 function getTotalPrecio() {
     return getCarrito().reduce((total, item) => total + item.precio * item.cantidad, 0);
 }
 
+// Vacía el carrito y actualiza el contador
 function vaciarCarrito() {
     localStorage.removeItem(KEY_CARRITO);
     actualizarContadorCarrito();
 }
 
+// Actualiza el contador del carrito en el header, mostrando la cantidad de items
 function actualizarContadorCarrito() {
     const badge = document.getElementById('carrito-badge');
     if (!badge) return;
@@ -122,6 +128,7 @@ async function cargarPartial(selectorContenedor, rutaHTML) {
     }
 }
 
+// Inicializa el layout de la página cargando los partials y actualizando el contador del carrito
 async function initLayout() {
     await cargarPartial('#header-container', '/partials/header.html');
     await cargarPartial('#footer-container', '/partials/footer.html');
