@@ -1,0 +1,76 @@
+/* Ticket: pantalla final de la compra */
+
+.ticket-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 16px;
+    min-height: calc(100vh - 120px);
+}
+
+.ticket-card {
+    background-color: var(--color-fondo-card);
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+.ticket-logo {
+    width: 140px;
+    margin-bottom: 12px;
+}
+
+.ticket-card h1 {
+    font-size: 1.5rem;
+    margin-bottom: 4px;
+}
+
+.ticket-empresa {
+    color: #777;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.ticket-datos {
+    text-align: left;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+}
+
+.ticket-datos p {
+    margin-bottom: 4px;
+}
+
+.ticket-card hr {
+    border: none;
+    border-top: 1px solid var(--color-borde, #ddd);
+    margin: 16px 0;
+}
+
+.ticket-items {
+    text-align: left;
+}
+
+.ticket-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 6px 0;
+}
+
+.ticket-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+.ticket-acciones {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

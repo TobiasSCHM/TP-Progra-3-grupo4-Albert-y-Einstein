@@ -25,9 +25,15 @@ const alta = async (req, res, next) => {
             sale_customer_name,
             sale_total
         });
-        await venta.addProducts(productos); // agrega los productos a la venta utilizando la relación muchos a muchos definida en los modelos
-        res.status(201).send(venta); // envía la venta creada con un código de estado 201 (creado)
+
+        // productos llega como [{ id, cantidad }, ...] desde el frontend.
+        // addProducts necesita un array de ids, así que los extraemos por separado
+        const ids = productos.map(p => p.id);
+        await venta.addProducts(ids);
+
+        res.status(201).send(venta);
     } catch (error) {
+        console.error(error);
         res.status(500).send({ error: 'Error al crear venta' });
     }
 };

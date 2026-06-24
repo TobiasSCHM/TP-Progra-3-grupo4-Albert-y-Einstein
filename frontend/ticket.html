@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" data-tema="claro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket — SoundStore</title>
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="stylesheet" href="/public/css/styles.css">
+    <link rel="stylesheet" href="/public/css/ticket.css">
+</head>
+<body>
+
+    <div id="header-container"></div>
+
+    <main class="ticket-main">
+
+        <section class="ticket-card">
+
+            <img src="/public/images/logo-soundstore.png" alt="SoundStore" class="ticket-logo">
+
+            <h1>¡Gracias por tu compra!</h1>
+            <p class="ticket-empresa">SoundStore — Instrumentos &amp; Equipos</p>
+
+            <div class="ticket-datos">
+                <p><strong>Cliente:</strong> <span id="ticket-cliente"></span></p>
+                <p><strong>Fecha:</strong> <span id="ticket-fecha"></span></p>
+                <p><strong>N° de venta:</strong> <span id="ticket-id"></span></p>
+            </div>
+
+            <hr>
+
+            <section id="ticket-items" class="ticket-items">
+                <!-- se renderiza con JS -->
+            </section>
+
+            <hr>
+
+            <div class="ticket-total">
+                <span>Total</span>
+                <span id="ticket-total-monto">$0</span>
+            </div>
+
+            <div class="ticket-acciones">
+                <button id="btn-descargar-pdf" class="btn-secondary">
+                    Descargar ticket en PDF
+                </button>
+                <button id="btn-volver" class="btn-primary">
+                    Finalizar
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/public/js/main.js"></script>
+    <script src="/public/js/ticket.js"></script>
+
+</body>
+</html>
