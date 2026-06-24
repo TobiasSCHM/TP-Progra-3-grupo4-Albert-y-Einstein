@@ -49,10 +49,25 @@ function finalizarYReiniciar() {
     window.location.href = '/index.html';
 }
 
-// Al cargar la página, carga el header/footer, muestra el ticket y conecta el botón de finalizar
+// Genera un PDF a partir de la tarjeta del ticket y lo descarga automáticamente
+function descargarTicketPDF() {
+    const elemento = document.querySelector('.ticket-card');
+    const opciones = {
+        margin: 10,
+        filename: 'ticket-soundstore.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
+    html2pdf().set(opciones).from(elemento).save();
+}
+
+// // Al cargar la página, carga el header/footer,
+// muestra el ticket y conecta los botones de finalizar y descargar PDF
 document.addEventListener('DOMContentLoaded', async () => {
     await initLayout();
     renderTicket();
 
     document.getElementById('btn-volver').addEventListener('click', finalizarYReiniciar);
+    document.getElementById('btn-descargar-pdf').addEventListener('click', descargarTicketPDF);
 });
