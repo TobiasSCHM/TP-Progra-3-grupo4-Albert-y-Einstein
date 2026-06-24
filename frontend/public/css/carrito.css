@@ -21,6 +21,7 @@
     border: 2px solid var(--color-primario);
     padding: 10px 22px;
     border-radius: 10px;
+    box-sizing: border-box;
     font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
