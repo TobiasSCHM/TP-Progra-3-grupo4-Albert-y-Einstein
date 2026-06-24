@@ -1,3 +1,38 @@
+.productos-hero {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 36px;
+}
+
+.productos-hero-eyebrow {
+    color: var(--color-secundario);
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.productos-hero-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--color-primario);
+    line-height: 1.15;
+    margin-bottom: 14px;
+}
+
+.productos-hero-texto {
+    color: #6b6b6b;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    .productos-hero-titulo {
+        font-size: 1.8rem;
+    }
+}
 
 .productos-main {
     max-width: 1200px;
@@ -14,12 +49,13 @@
 }
 
 .tab-btn {
-    padding: 10px 24px;
-    border: 2px solid var(--color-primario);
+    padding: 10px 26px;
+    border: 3px solid var(--color-primario);
     border-radius: 24px;
     background: transparent;
     color: var(--color-primario);
     font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
 }
@@ -83,6 +119,8 @@
     height: 200px;
     object-fit: cover;
     background: #f5f5f5;
+    border-bottom: 3px solid transparent;
+    border-image: repeating-linear-gradient(90deg, var(--color-dorado) 0 6px, transparent 6px 12px) 1;
 }
 
 .producto-card-body {
@@ -102,7 +140,8 @@
 }
 
 .producto-nombre {
-    font-size: 1rem;
+    font-size: 1.05rem;
+    font-weight: 700;
     color: var(--color-primario);
     margin: 0;
 }
@@ -136,6 +175,8 @@
     font-size: 0.85rem;
     padding: 8px 14px;
     white-space: nowrap;
+    background-color: var(--color-secundario) !important;
+    border-color: var(--color-secundario) !important;
 }
 
 
