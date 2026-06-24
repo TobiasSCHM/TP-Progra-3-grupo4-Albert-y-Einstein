@@ -42,7 +42,7 @@ function renderCarrito() {
                 <span>${formatearPrecio(subtotal)}</span>
                 <button class="btn-eliminar" onclick="quitarItem(${item.id})" title="Quitar">✕</button>
             </div>
-        </article>`;
+        </article>`; // retorna el HTML de cada item del carrito
     }).join('');
 
     actualizarResumen();
@@ -135,7 +135,7 @@ async function confirmarCompra() {
 }
 
 
-
+// Escapa caracteres especiales para evitar inyección de HTML al mostrar el nombre del producto
 function escaparHTML(str) {
     if (!str) return '';
     return String(str)

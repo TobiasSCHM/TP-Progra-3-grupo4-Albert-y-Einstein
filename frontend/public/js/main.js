@@ -27,7 +27,7 @@ function getCarrito() {
         return [];
     }
 }
-
+// Guarda el carrito en localStorage
 function guardarCarrito(carrito) {
     localStorage.setItem(KEY_CARRITO, JSON.stringify(carrito));
 }
@@ -45,6 +45,7 @@ function agregarAlCarrito(producto) {
 }
 
 function eliminarDelCarrito(id) {
+    // Filtra el carrito para eliminar el producto con el id dado y guarda el carrito actualizado
     guardarCarrito(getCarrito().filter(item => item.id !== id));
     actualizarContadorCarrito();
 }
@@ -94,6 +95,7 @@ function aplicarTema(tema) {
     if (btn) btn.textContent = tema === 'oscuro' ? ' Claro' : ' Oscuro';
 }
 
+// Cambia entre tema claro y oscuro, guardando la preferencia en localStorage
 function toggleTema() {
     const actual = localStorage.getItem(KEY_TEMA) || 'claro';
     aplicarTema(actual === 'claro' ? 'oscuro' : 'claro');

@@ -1,5 +1,6 @@
 //depende de main.js para funciones de carrito, formateo de precio y nombre de usuario
 
+// Estado global de la página de productos, para manejar la paginación y la categoría activa
 const estado = {
     categoriaActiva: 'Guitarras',
     paginaActual: 1,
@@ -9,7 +10,7 @@ const estado = {
     cargando: false
 };
 
-
+// Carga todos los productos desde el backend y los almacena en estado.todosLosProductos
 async function fetchTodosLosProductos() {
     mostrarEstado('Cargando productos...', false);
 
@@ -52,7 +53,7 @@ function getProductosDePaginaActual() {
 }
 
 
-
+// Renderiza los productos de la página actual y configura los botones de agregar al carrito
 function renderProductos() {
     const grilla = document.getElementById('grilla-productos');
     const productos = getProductosDePaginaActual();
@@ -86,6 +87,7 @@ function renderProductos() {
     renderPaginacion();
 }
 
+// Crea el HTML de una tarjeta de producto, incluyendo la imagen, nombre, descripción, precio y botón de agregar al carrito
 function crearCardHTML(p) {
     const imagenSrc = p.product_image
     ? `${BACKEND_URL}${p.product_image}`
@@ -120,6 +122,7 @@ function crearCardHTML(p) {
         </article>`;
 }
 
+// Renderiza los botones de paginación según la cantidad de páginas y la página actual
 function renderPaginacion() {
     const contenedor = document.getElementById('paginacion');
 
@@ -179,7 +182,7 @@ function ocultarEstado() {
 
 function mostrarFeedbackBoton(btn) {
     const textoOriginal = btn.textContent;
-    btn.textContent = '✓ Agregado';
+    btn.textContent = 'Agregado';
     btn.disabled = true;
     btn.classList.add('agregado');
     setTimeout(() => {
@@ -189,6 +192,7 @@ function mostrarFeedbackBoton(btn) {
     }, 900);
 }
 
+// Escapa caracteres especiales para evitar inyección de HTML al mostrar el nombre del producto
 function escapar(str) {
     if (!str) return '';
     return String(str)
