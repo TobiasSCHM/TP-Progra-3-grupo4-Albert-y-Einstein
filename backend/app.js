@@ -21,8 +21,10 @@ app.set('view engine', 'ejs'); // Configura EJS como el motor de plantillas para
 app.set('views', path.join(__dirname, 'src/views')); // Configura la ruta para las vistas de EJS
 
 // Configura la ruta para servir archivos estáticos (imágenes, CSS, etc.) desde la carpeta 'public'
+// y también sirve la carpeta 'frontend' para el cliente
 app.use('/uploads', express.static(path.join(__dirname, 'src/public/uploads')));
 app.use('/css', express.static(path.join(__dirname, 'src/public/css')));
+app.use(express.static(path.join(__dirname, '../frontend')));
 app.use('/images', express.static(path.join(__dirname, 'src/public/images')));
 
 // Importa las rutas de cada módulo y las registra en la app

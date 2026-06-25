@@ -3,7 +3,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 
-// Define el modelo Sale con los campos sale_id, sale_customer_name, sale_total y sale_date
+// Define el modelo Sale con los campos sale_id,
+// sale_customer_name, sale_total y sale_date
 const Sale = sequelize.define(
     'Sale',
     {

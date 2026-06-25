@@ -3,7 +3,8 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../database');
 
-// Define el modelo Product con los campos product_id, product_name, product_price, product_description, product_image, product_category y product_active
+// Define el modelo Product con los campos product_id, product_name,
+// product_price, product_description, product_image, product_category y product_active
 const Product = sequelize.define(
     'Product',
     {
