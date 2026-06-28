@@ -1,11 +1,29 @@
-// Importa los tres modelos.
-// Los junta todos en un mismo archivo para poder manejar las relaciones entre ellos y exportarlos juntos
+// Importa DataTypes y la instancia de Sequelize, para poder definir la tabla intermedia con un campo propio
+const { DataTypes } = require('sequelize');
+const sequelize = require('../database');
+
 const User = require('./User');
 const Product = require('./Product');
 const Sale = require('./Sale');
 
-// Relación muchos a muchos entre Product y Sale
-Product.belongsToMany(Sale, { through: 'SaleProducts', freezeTableName: true });
-Sale.belongsToMany(Product, { through: 'SaleProducts', freezeTableName: true });
+// Antes la tabla intermedia entre Product y Sale era solo un string ('SaleProducts'),
+// generada automáticamente por Sequelize sin columnas propias.
+// Ahora la definimos como modelo propio para poder agregarle "cantidad"
+// (antes no se guardaba cuántas unidades de cada producto se vendieron, solo qué productos).
+// OJO: se mantiene el mismo nombre de tabla ('SaleProducts') para no perder las ventas que ya tengas guardadas.
+const SaleProduct = sequelize.define(
+    'SaleProducts',
+    {
+        cantidad: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 1
+        }
+    },
+    { freezeTableName: true }
+);
 
-module.exports = { User, Product, Sale };
+Product.belongsToMany(Sale, { through: SaleProduct });
+Sale.belongsToMany(Product, { through: SaleProduct });
+
+module.exports = { User, Product, Sale, SaleProduct };

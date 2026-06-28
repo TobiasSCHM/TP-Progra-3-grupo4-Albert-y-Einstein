@@ -8,5 +8,6 @@ const { validarAltaVenta } = require('../middlewares/validate');
 // cada ruta llama a una función del controlador correspondiente y utiliza middlewares de validación cuando es necesario
 saleRoutes.get('/listar', saleController.listar);
 saleRoutes.post('/alta', validarAltaVenta, saleController.alta);
+saleRoutes.get('/:id/ticket-pdf', saleController.generarTicketPDF);
 
 module.exports = { saleRoutes };

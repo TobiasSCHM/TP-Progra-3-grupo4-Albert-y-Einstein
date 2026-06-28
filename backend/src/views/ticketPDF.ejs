@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Ticket de compra</title>
+<style>
+    body { font-family: Arial, Helvetica, sans-serif; margin:0; padding:40px; background:#ffffff; color:#1c1c1c; }
+    .ticket-card { max-width:480px; margin:0 auto; text-align:center; border:1px solid #ddd; border-radius:14px; padding:32px; }
+    .ticket-logo { width:140px; margin-bottom:12px; }
+    h1 { font-size:1.4rem; margin:0 0 4px 0; }
+    .ticket-empresa { color:#777; font-size:0.9rem; margin-bottom:20px; }
+    .ticket-datos { text-align:left; font-size:0.9rem; margin-bottom:16px; }
+    .ticket-datos p { margin:0 0 4px 0; }
+    hr { border:none; border-top:1px solid #ddd; margin:16px 0; }
+    .ticket-items { text-align:left; }
+    .ticket-item { display:flex; justify-content:space-between; font-size:0.9rem; padding:6px 0; }
+    .ticket-total { display:flex; justify-content:space-between; font-size:1.2rem; font-weight:bold; margin-top:8px; }
+</style>
+</head>
+<body>
+    <section class="ticket-card">
+        <img src="<%= logoDataUri %>" alt="SoundStore" class="ticket-logo">
+        <h1>¡Gracias por tu compra!</h1>
+        <p class="ticket-empresa">SoundStore — Instrumentos &amp; Equipos</p>
+
+        <div class="ticket-datos">
+            <p><strong>Cliente:</strong> <%= venta.sale_customer_name %></p>
+            <p><strong>Fecha:</strong> <%= new Date(venta.sale_date).toLocaleDateString('es-AR') %></p>
+            <p><strong>N° de venta:</strong> <%= venta.sale_id %></p>
+        </div>
+
+        <hr>
+
+        <section class="ticket-items">
+            <% venta.Products.forEach(function(producto) { %>
+                <% const cantidad = producto.SaleProducts.cantidad; %>
+                <div class="ticket-item">
+                    <span><%= cantidad %>x <%= producto.product_name %></span>
+                    <span>$<%= (producto.product_price * cantidad).toLocaleString('es-AR') %></span>
+                </div>
+            <% }); %>
+        </section>
+
+        <hr>
+
+        <div class="ticket-total">
+            <span>Total</span>
+            <span>$<%= Number(venta.sale_total).toLocaleString('es-AR') %></span>
+        </div>
+    </section>
+</body>
+</html>

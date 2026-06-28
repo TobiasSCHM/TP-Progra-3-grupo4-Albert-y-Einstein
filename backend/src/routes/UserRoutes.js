@@ -2,10 +2,11 @@
 const express = require('express');
 const userRoutes = express.Router();
 const userController = require('../controllers/userController');
+const requireJWT = require('../middlewares/requireJWT');
 const { validarAltaUsuario, validarLogin } = require('../middlewares/validate');
 
-// Define los endpoints de usuarios. Cada línea asocia un método HTTP y una URL con una función del controlador:
-userRoutes.post('/alta', validarAltaUsuario, userController.alta); // permite a un usuario registrarse
-userRoutes.post('/login', validarLogin, userController.login); // permite a un usuario iniciar sesión
+// crear un nuevo admin requiere ya estar logueado (token JWT válido), para que no cualquiera pueda crearse un admin
+userRoutes.post('/alta', requireJWT, validarAltaUsuario, userController.alta);
+userRoutes.post('/login', validarLogin, userController.login); // el login queda público, obviamente
 
 module.exports = { userRoutes };

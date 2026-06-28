@@ -1,6 +1,7 @@
 // Importa el modelo de User para poder realizar consultas a la base de datos y bcrypt para encriptar las contraseñas
 const { User } = require('../models/index');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // Función para crear un nuevo usuario, recibe el email y la contraseña
 const alta = async (req, res, next) => {
@@ -31,10 +32,20 @@ const login = async (req, res, next) => {
         if (!match) {
             return res.status(401).send({ error: 'Contraseña incorrecta' });
         }
-        res.status(200).send({ status: 'Login exitoso', id: usuario.user_id });
+
+        // Genera un JWT con el id y el email del usuario adentro (el "payload"), firmado con JWT_SECRET.
+        // Este token es lo que el cliente de la API va a tener que mandar en cada request protegido,
+        // en el header Authorization: Bearer <token>
+        const token = jwt.sign(
+            { id: usuario.user_id, email: usuario.user_email },
+            process.env.JWT_SECRET,
+            { expiresIn: '4h' } // mismo tiempo de vida que la cookie del panel admin
+        );
+
+        res.status(200).send({ status: 'Login exitoso', id: usuario.user_id, token });
     } catch (error) {
         res.status(500).send({ error: 'Error al hacer login' });
     }
-};
+}
 
 module.exports = { alta, login };
