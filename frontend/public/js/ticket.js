@@ -49,17 +49,11 @@ function finalizarYReiniciar() {
     window.location.href = '/index.html';
 }
 
-// Genera un PDF a partir de la tarjeta del ticket y lo descarga automáticamente
+// Descarga el ticket en PDF, generado en el servidor con Puppeteer
 function descargarTicketPDF() {
-    const elemento = document.querySelector('.ticket-card');
-    const opciones = {
-        margin: 10,
-        filename: 'ticket-soundstore.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-    html2pdf().set(opciones).from(elemento).save();
+    const ventaId = localStorage.getItem('soundstore_ultima_venta');
+    if (!ventaId) return;
+    window.location.href = `${API_BASE}/sales/${ventaId}/ticket-pdf`;
 }
 
 // // Al cargar la página, carga el header/footer,
